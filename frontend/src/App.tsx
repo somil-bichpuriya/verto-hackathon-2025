@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home';
+import Pricing from './pages/Pricing';
+import RegisterCustomer from './pages/RegisterCustomer';
+import RegisterPartner from './pages/RegisterPartner';
+import CustomerSuccess from './pages/CustomerSuccess';
+import LoginCustomer from './pages/LoginCustomer';
+import LoginPartner from './pages/LoginPartner';
+import LoginAdmin from './pages/LoginAdmin';
+import CustomerDashboard from './pages/CustomerDashboard';
+import PartnerDashboard from './pages/PartnerDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminCustomers from './pages/AdminCustomers';
+import AdminPartners from './pages/AdminPartners';
+import AdminVerification from './pages/AdminVerification';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/register/customer" element={<RegisterCustomer />} />
+          <Route path="/register/customer/success" element={<CustomerSuccess />} />
+          <Route path="/register/partner" element={<RegisterPartner />} />
+          <Route path="/login/customer" element={<LoginCustomer />} />
+          <Route path="/login/partner" element={<LoginPartner />} />
+          <Route path="/login/admin" element={<LoginAdmin />} />
+          <Route path="/customer/dashboard" element={
+            <ProtectedRoute requiredType="customer">
+              <CustomerDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/partner/dashboard" element={
+            <ProtectedRoute requiredType="partner">
+              <PartnerDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute requiredType="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/customers" element={
+            <ProtectedRoute requiredType="admin">
+              <AdminCustomers />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/partners" element={
+            <ProtectedRoute requiredType="admin">
+              <AdminPartners />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/verification" element={
+            <ProtectedRoute requiredType="admin">
+              <AdminVerification />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
