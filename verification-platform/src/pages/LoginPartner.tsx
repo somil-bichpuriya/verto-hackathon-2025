@@ -79,6 +79,7 @@ const LoginPartner = () => {
           <p>Don't have an account?</p>
           <div className="login-links">
             <Link to="/partner/register" className="login-link">Register as Partner</Link>
+            <Link to="/" className="login-link">← Back to Home</Link>
           </div>
         </div>
       </div>

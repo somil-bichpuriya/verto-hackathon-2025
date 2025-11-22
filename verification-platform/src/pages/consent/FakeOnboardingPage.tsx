@@ -26,7 +26,7 @@ export const FakeOnboardingPage: React.FC = () => {
         <div className="consent-header">
           <div style={{display: 'flex', alignItems: 'center'}}>
             <div className="consent-icon">🏢</div>
-            <h1>Acme Financial Ltd. Onboarding</h1>
+            <h1>Vice International Ltd. Onboarding</h1>
           </div>
           <p className="consent-subtitle">
             Please enter your <strong>Digital Business Identity Number</strong> (DBIN) to continue.

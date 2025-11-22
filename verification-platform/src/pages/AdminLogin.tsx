@@ -116,6 +116,11 @@ function AdminLogin() {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
+          <p className="mb-2">
+            <Link to="/" className="text-blue-600 hover:text-blue-700 font-medium">
+              ← Back to Home
+            </Link>
+          </p>
           <p>Secure access for authorized administrators only</p>
         </div>
       </div>

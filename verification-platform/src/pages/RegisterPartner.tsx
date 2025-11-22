@@ -221,6 +221,11 @@ const RegisterPartner = () => {
               Register as Customer
             </a>
           </p>
+          <p>
+            <a href="/" className="link">
+              ← Back to Home
+            </a>
+          </p>
         </div>
       </div>
     </div>
