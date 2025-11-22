@@ -44,6 +44,7 @@ export interface FakeCustomerDocument {
 
 export interface FakeConsentRequest {
   _id: string;
+  customerEmail?: string;
   partner: {
     companyName: string;
     email: string;
@@ -93,30 +94,47 @@ const documentTypes = [
 ];
 
 // Generate seeded random customers for Vice International
-export const fakeCustomers: FakeCustomer[] = Array.from({ length: 15 }, (_, index) => {
-  const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-  const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-  const companyName = companyNames[Math.floor(Math.random() * companyNames.length)];
-  const industry = industries[Math.floor(Math.random() * industries.length)];
-  const country = countries[Math.floor(Math.random() * countries.length)];
-  const status = ['active', 'active', 'active', 'pending', 'inactive'][Math.floor(Math.random() * 5)] as 'active' | 'pending' | 'inactive';
-  const documentsRequired = 3 + Math.floor(Math.random() * 4); // 3-6 documents
-  const documentsSubmitted = status === 'active' ? documentsRequired : Math.floor(Math.random() * documentsRequired);
+export const fakeCustomers: FakeCustomer[] = [
+  // Specific customer that matches login credentials
+  {
+    id: 'cust_demo',
+    companyName: 'Global Tech Solutions Ltd',
+    email: 'customer@gmail.com',
+    contactName: 'John Smith',
+    contactPhone: '+1-555-0123',
+    status: 'active',
+    createdAt: '2024-10-15',
+    documentsSubmitted: 4,
+    totalDocumentsRequired: 5,
+    industry: 'Technology',
+    country: 'United States'
+  },
+  // Other seeded customers
+  ...Array.from({ length: 14 }, (_, index) => {
+    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+    const companyName = companyNames[Math.floor(Math.random() * companyNames.length)];
+    const industry = industries[Math.floor(Math.random() * industries.length)];
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const status = ['active', 'active', 'active', 'pending', 'inactive'][Math.floor(Math.random() * 5)] as 'active' | 'pending' | 'inactive';
+    const documentsRequired = 3 + Math.floor(Math.random() * 4); // 3-6 documents
+    const documentsSubmitted = status === 'active' ? documentsRequired : Math.floor(Math.random() * documentsRequired);
 
-  return {
-    id: `cust_${index + 1}`,
-    companyName,
-    email: `contact@${companyName.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com`,
-    contactName: `${firstName} ${lastName}`,
-    contactPhone: `+1-${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
-    status,
-    createdAt: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0],
-    documentsSubmitted,
-    totalDocumentsRequired: documentsRequired,
-    industry,
-    country
-  };
-});
+    return {
+      id: `cust_${index + 2}`,
+      companyName,
+      email: `contact@${companyName.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com`,
+      contactName: `${firstName} ${lastName}`,
+      contactPhone: `+1-${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+      status,
+      createdAt: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0],
+      documentsSubmitted,
+      totalDocumentsRequired: documentsRequired,
+      industry,
+      country
+    };
+  })
+];
 
 // Generate seeded random document types for Vice International
 export const fakeDocumentTypes: FakeDocumentType[] = documentTypes.slice(0, 8).map((doc, index) => ({
@@ -247,6 +265,7 @@ export const fakeCustomerDocumentTypes: FakeDocumentType[] = [
 export const fakeConsentRequests: FakeConsentRequest[] = [
   {
     _id: 'consent_1',
+    customerEmail: 'customer@gmail.com',
     partner: {
       companyName: 'Vice International',
       email: 'partner@viceinternational.com'
@@ -258,6 +277,7 @@ export const fakeConsentRequests: FakeConsentRequest[] = [
   },
   {
     _id: 'consent_2',
+    customerEmail: 'contact@innovativefinancecorp.com',
     partner: {
       companyName: 'Global Finance Corp',
       email: 'partner@globalfinance.com'

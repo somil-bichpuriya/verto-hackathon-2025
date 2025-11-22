@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './ConsentPage.css';
 
 const fakeConsent = {
-  partnerName: 'Acme Financial Ltd.',
-  customerEmail: 'jane.doe@globex.com',
+  partnerName: 'Vice International',
+  customerEmail: 'customer@gmail.com',
   expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   documentTypesNeeded: ['d1', 'd2'],
 };

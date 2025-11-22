@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fakeCustomers, type FakeCustomer } from '../services/fakeData.service';
+import { fakeCustomers, fakeConsentRequests, type FakeCustomer } from '../services/fakeData.service';
 
 const PartnerCustomers = () => {
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,16 @@ const PartnerCustomers = () => {
   useEffect(() => {
     // Simulate API call delay
     const timer = setTimeout(() => {
-      setCustomers(fakeCustomers);
+      // Filter customers who have granted consent to Vice International
+      const consentedCustomerEmails = fakeConsentRequests
+        .filter(consent => consent.isGranted && consent.partner.companyName === 'Vice International')
+        .map(consent => consent.customerEmail || 'customer@gmail.com'); // Fallback for demo
+      
+      const consentedCustomers = fakeCustomers.filter(customer => 
+        consentedCustomerEmails.includes(customer.email)
+      );
+      
+      setCustomers(consentedCustomers);
       setLoading(false);
     }, 1000); // 2 second delay
 

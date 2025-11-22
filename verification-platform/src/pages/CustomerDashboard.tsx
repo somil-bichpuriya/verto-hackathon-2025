@@ -156,6 +156,25 @@ const CustomerDashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Welcome back, Global Tech Solutions Ltd</h2>
+              <p className="text-gray-600 mt-1">Manage your documents and consent requests</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="text-right">
+                <p className="text-sm text-gray-600">Account Status</p>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  <CheckCircle className="w-4 h-4 mr-1" />
+                  Active
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Success/Error Messages */}
         {error && (
           <div className="mb-6 bg-red-50 border border-red-200 rounded-md p-4">

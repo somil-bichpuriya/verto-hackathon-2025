@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useNavigate } from 'react-router-dom';
+import { fakeCustomers, fakeDashboardMetrics } from '../services/fakeData.service';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Dashboard() {
   const stats = [
     {
       title: 'Total Clients',
-      value: '2,847',
+      value: fakeDashboardMetrics.totalCustomers.toString(),
       change: '+12.5%',
       trend: 'up',
       icon: Users,
@@ -29,7 +30,7 @@ function Dashboard() {
     },
     {
       title: 'Pending Reviews',
-      value: '156',
+      value: fakeDashboardMetrics.pendingCustomers.toString(),
       change: '-8.2%',
       trend: 'down',
       icon: Clock,
@@ -38,7 +39,7 @@ function Dashboard() {
     },
     {
       title: 'Approved',
-      value: '2,459',
+      value: fakeDashboardMetrics.activeCustomers.toString(),
       change: '+18.7%',
       trend: 'up',
       icon: CheckCircle,
@@ -47,8 +48,8 @@ function Dashboard() {
     },
     {
       title: 'Active Partners',
-      value: '42',
-      change: '+5.3%',
+      value: '1', // Vice International
+      change: '+100%',
       trend: 'up',
       icon: Building2,
       color: 'purple',
@@ -66,56 +67,57 @@ function Dashboard() {
   ];
 
   const documentStatusData = [
-    { name: 'Approved', value: 2459, color: '#10b981' },
-    { name: 'Pending', value: 156, color: '#f59e0b' },
-    { name: 'Rejected', value: 232, color: '#ef4444' },
+    { name: 'Approved', value: fakeDashboardMetrics.documentsUploaded, color: '#10b981' },
+    { name: 'Pending', value: fakeDashboardMetrics.documentsPending, color: '#f59e0b' },
+    { name: 'Rejected', value: Math.floor(fakeDashboardMetrics.documentsPending * 0.3), color: '#ef4444' },
   ];
 
+  // Use actual customer data for recent activities
   const recentActivities = [
     {
       id: 1,
-      clientId: 'CLT-001',
-      client: 'Acme Corp Ltd',
+      clientId: fakeCustomers[0].id,
+      client: fakeCustomers[0].companyName,
       action: 'Documents approved',
       time: '5 minutes ago',
       status: 'approved',
-      country: 'United Kingdom',
+      country: fakeCustomers[0].country,
     },
     {
       id: 2,
-      clientId: 'CLT-002',
-      client: 'TechStart Inc',
+      clientId: fakeCustomers[1].id,
+      client: fakeCustomers[1].companyName,
       action: 'Verification pending',
       time: '12 minutes ago',
       status: 'pending',
-      country: 'United States',
+      country: fakeCustomers[1].country,
     },
     {
       id: 3,
-      clientId: 'CLT-003',
-      client: 'Global Traders SA',
+      clientId: fakeCustomers[2].id,
+      client: fakeCustomers[2].companyName,
       action: 'Documents rejected',
       time: '1 hour ago',
       status: 'rejected',
-      country: 'Spain',
+      country: fakeCustomers[2].country,
     },
     {
       id: 4,
-      clientId: 'CLT-004',
-      client: 'Eastern Imports',
+      clientId: fakeCustomers[3].id,
+      client: fakeCustomers[3].companyName,
       action: 'Documents approved',
       time: '2 hours ago',
       status: 'approved',
-      country: 'Singapore',
+      country: fakeCustomers[3].country,
     },
     {
       id: 5,
-      clientId: 'CLT-005',
-      client: 'Nordic Solutions',
+      clientId: fakeCustomers[4].id,
+      client: fakeCustomers[4].companyName,
       action: 'New submission',
       time: '3 hours ago',
       status: 'pending',
-      country: 'Norway',
+      country: fakeCustomers[4].country,
     },
   ];
 
