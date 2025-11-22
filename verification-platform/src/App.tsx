@@ -15,6 +15,8 @@ import RegisterPartner from './pages/RegisterPartner';
 import PartnerDocumentConfig from './pages/PartnerDocumentConfig';
 import PartnerDashboard from './pages/PartnerDashboard';
 import AdminLogin from './pages/AdminLogin';
+import HomePage from './pages/HomePage';
+import PricingPage from './pages/PricingPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -120,17 +122,9 @@ function App() {
         <Route path="/partner/configure-documents" element={<PartnerDocumentConfig />} />
         <Route path="/partner/dashboard/*" element={<PartnerDashboard />} />
         
-        {/* Default Route */}
-        <Route 
-          path="/" 
-          element={
-            <Navigate to={
-              isAuthenticated ? (
-                userType === 'admin' ? '/dashboard' : '/customer/dashboard'
-              ) : '/customer/login'
-            } />
-          } 
-        />
+        {/* Public Routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/pricing" element={<PricingPage />} />
       </Routes>
     </Router>
   );
