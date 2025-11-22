@@ -2,7 +2,7 @@ import { api } from '../config/api';
 import type { Customer, Partner, DocumentType, PartnerCredentials, ApiResponse } from '../types';
 
 export const customerService = {
-  register: async (data: Omit<Customer, 'id' | 'createdAt'>) => {
+  register: async (data: Omit<Customer, 'id' | 'createdAt'> & { password: string }) => {
     const response = await api.post<ApiResponse<{ customer: Customer }>>('/register/customer', data);
     return response.data;
   },
@@ -14,7 +14,7 @@ export const customerService = {
 };
 
 export const partnerService = {
-  register: async (data: Omit<Partner, 'id' | 'isActive' | 'createdAt'>) => {
+  register: async (data: Omit<Partner, 'id' | 'isActive' | 'createdAt'> & { password: string }) => {
     const response = await api.post<ApiResponse<{ partner: Partner; credentials: PartnerCredentials }>>(
       '/register/partner',
       data

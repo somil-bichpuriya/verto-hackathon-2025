@@ -2,11 +2,45 @@
   "users": [
     {
       "id": "USR-001",
+      "fullName": "Regular User",
+      "email": "user@vertofx.com",
+      "password": "user123",
+      "company": "VertoFX",
+      "role": "user",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "admins": [
+    {
+      "id": "ADM-001",
       "fullName": "Admin User",
-      "email": "admin@vertofx.com",
+      "username": "admin",
       "password": "admin123",
       "company": "VertoFX",
       "role": "admin",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUST-001",
+      "fullName": "Customer User",
+      "email": "customer@example.com",
+      "password": "customer123",
+      "companyName": "Example Corp",
+      "address": "123 Business St, City, Country",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "partners": [
+    {
+      "id": "PART-001",
+      "fullName": "Partner User",
+      "email": "partner@example.com",
+      "password": "partner123",
+      "companyName": "Partner Corp",
+      "apiKey": "verto_abc123def456",
+      "documentTypesConfig": ["Business License", "Tax Registration"],
       "registeredDate": "2024-01-01"
     }
   ],
@@ -19,7 +53,8 @@
       "status": "approved",
       "documents": 8,
       "joinedDate": "2024-01-15",
-      "lastActivity": "2 hours ago"
+      "lastActivity": "2 hours ago",
+      "partnerId": "PTR-001"
     },
     {
       "id": "CLT-002",
@@ -29,7 +64,8 @@
       "status": "pending",
       "documents": 5,
       "joinedDate": "2024-02-20",
-      "lastActivity": "1 day ago"
+      "lastActivity": "1 day ago",
+      "partnerId": "PTR-002"
     },
     {
       "id": "CLT-003",
@@ -39,7 +75,8 @@
       "status": "rejected",
       "documents": 4,
       "joinedDate": "2024-01-10",
-      "lastActivity": "3 days ago"
+      "lastActivity": "3 days ago",
+      "partnerId": "PTR-003"
     },
     {
       "id": "CLT-004",
@@ -49,7 +86,8 @@
       "status": "approved",
       "documents": 12,
       "joinedDate": "2023-12-05",
-      "lastActivity": "5 hours ago"
+      "lastActivity": "5 hours ago",
+      "partnerId": "PTR-004"
     },
     {
       "id": "CLT-005",
@@ -59,7 +97,8 @@
       "status": "pending",
       "documents": 6,
       "joinedDate": "2024-03-01",
-      "lastActivity": "12 hours ago"
+      "lastActivity": "12 hours ago",
+      "partnerId": "PTR-001"
     },
     {
       "id": "CLT-006",
@@ -69,7 +108,8 @@
       "status": "approved",
       "documents": 9,
       "joinedDate": "2023-11-20",
-      "lastActivity": "1 hour ago"
+      "lastActivity": "1 hour ago",
+      "partnerId": "PTR-002"
     },
     {
       "id": "CLT-007",
@@ -79,7 +119,8 @@
       "status": "pending",
       "documents": 7,
       "joinedDate": "2024-02-14",
-      "lastActivity": "8 hours ago"
+      "lastActivity": "8 hours ago",
+      "partnerId": "PTR-003"
     },
     {
       "id": "CLT-008",
@@ -89,7 +130,8 @@
       "status": "approved",
       "documents": 10,
       "joinedDate": "2023-10-30",
-      "lastActivity": "3 hours ago"
+      "lastActivity": "3 hours ago",
+      "partnerId": "PTR-001"
     },
     {
       "id": "CLT-009",
@@ -99,7 +141,8 @@
       "status": "pending",
       "documents": 4,
       "joinedDate": "2024-03-15",
-      "lastActivity": "6 hours ago"
+      "lastActivity": "6 hours ago",
+      "partnerId": "PTR-004"
     },
     {
       "id": "CLT-010",
@@ -109,7 +152,8 @@
       "status": "approved",
       "documents": 15,
       "joinedDate": "2023-09-10",
-      "lastActivity": "30 minutes ago"
+      "lastActivity": "30 minutes ago",
+      "partnerId": "PTR-002"
     },
     {
       "id": "CLT-011",
@@ -119,7 +163,8 @@
       "status": "rejected",
       "documents": 3,
       "joinedDate": "2024-02-28",
-      "lastActivity": "2 days ago"
+      "lastActivity": "2 days ago",
+      "partnerId": "PTR-003"
     },
     {
       "id": "CLT-012",
@@ -129,7 +174,8 @@
       "status": "pending",
       "documents": 8,
       "joinedDate": "2024-03-20",
-      "lastActivity": "4 hours ago"
+      "lastActivity": "4 hours ago",
+      "partnerId": "PTR-001"
     },
     {
       "id": "CLT-013",
@@ -139,7 +185,8 @@
       "status": "approved",
       "documents": 11,
       "joinedDate": "2023-08-15",
-      "lastActivity": "1 hour ago"
+      "lastActivity": "1 hour ago",
+      "partnerId": "PTR-004"
     },
     {
       "id": "CLT-014",
@@ -149,7 +196,8 @@
       "status": "rejected",
       "documents": 5,
       "joinedDate": "2024-01-25",
-      "lastActivity": "5 days ago"
+      "lastActivity": "5 days ago",
+      "partnerId": "PTR-002"
     },
     {
       "id": "CLT-015",
@@ -159,14 +207,15 @@
       "status": "pending",
       "documents": 6,
       "joinedDate": "2024-03-10",
+      "partnerId": "PTR-003",
       "lastActivity": "10 hours ago"
     }
   ],
-  "partners": [
+  "partnerOrganizations": [
     {
       "id": "PTR-001",
-      "name": "FinTech Solutions Ltd",
-      "email": "partners@fintech.com",
+      "name": "Wise",
+      "email": "partners@wise.com",
       "country": "United Kingdom",
       "requestsCount": 45,
       "status": "active",
@@ -212,6 +261,16 @@
       "status": "active",
       "joinedDate": "2023-07-22",
       "lastRequest": "12 hours ago"
+    },
+    {
+      "id": "PTR-006",
+      "name": "PayGlobal Inc",
+      "email": "integration@payglobal.com",
+      "country": "United States",
+      "requestsCount": 32,
+      "status": "active",
+      "joinedDate": "2023-08-20",
+      "lastRequest": "1 day ago"
     }
   ],
   "documents": [

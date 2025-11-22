@@ -10,6 +10,8 @@ const RegisterPartner = () => {
     companyName: '',
     email: '',
     documentTypesConfig: [] as string[],
+    password: '',
+    confirmPassword: '',
   });
   const [documentTypes, setDocumentTypes] = useState<DocumentType[]>([]);
   const [credentials, setCredentials] = useState<PartnerCredentials | null>(null);
@@ -67,11 +69,24 @@ const RegisterPartner = () => {
       return;
     }
 
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    // Validate password length
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
     try {
-      const response = await partnerService.register(formData);
+      const { confirmPassword, ...registrationData } = formData;
+      const response = await partnerService.register(registrationData);
       if (response.success && response.data?.credentials) {
         setCredentials(response.data.credentials);
       }
@@ -232,6 +247,36 @@ const RegisterPartner = () => {
                 ))}
               </div>
             )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password *</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              placeholder="At least 6 characters"
+              minLength={6}
+              disabled={loading}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password *</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              placeholder="Re-enter your password"
+              minLength={6}
+              disabled={loading}
+            />
           </div>
 
           <button type="submit" className="submit-button" disabled={loading || loadingTypes}>

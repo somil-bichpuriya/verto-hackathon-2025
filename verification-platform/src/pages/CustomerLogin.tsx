@@ -1,36 +1,37 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogIn, ShieldCheck } from 'lucide-react';
-import { authenticateAdmin, initializeUsers } from '../data/dataService';
+import { authenticateCustomer } from '../data/dataService';
 
-interface LoginProps {
-  onLogin: () => void;
-}
-
-function Login({ onLogin }: LoginProps) {
+function CustomerLogin() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Initialize users from database on component mount
-  useState(() => {
-    initializeUsers();
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
-    const admin = authenticateAdmin(formData.username, formData.password);
-    
-    if (admin) {
-      // Store admin info in localStorage
-      localStorage.setItem('currentUser', JSON.stringify({ ...admin, role: 'admin' }));
-      onLogin();
-    } else {
-      setError('Invalid username or password. Please try again.');
+    setLoading(true);
+
+    try {
+      const customer = authenticateCustomer(formData.email, formData.password);
+      
+      if (customer) {
+        // Store customer info in localStorage
+        localStorage.setItem('currentUser', JSON.stringify({ ...customer, role: 'customer' }));
+        // Redirect to customer dashboard
+        navigate('/customer/dashboard');
+      } else {
+        setError('Invalid email or password. Please check your credentials.');
+      }
+    } catch (err: any) {
+      setError('Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +45,7 @@ function Login({ onLogin }: LoginProps) {
             <ShieldCheck className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">V-Verify</h1>
-          <p className="text-gray-600">Verification Platform</p>
+          <p className="text-gray-600">Customer Portal</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 animate-slide-in">
@@ -52,17 +53,18 @@ function Login({ onLogin }: LoginProps) {
           
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
               </label>
               <input
-                id="username"
-                type="text"
+                id="email"
+                type="email"
                 required
-                value={formData.username}
-                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                placeholder="admin"
+                placeholder="customer@company.com"
+                disabled={loading}
               />
             </div>
 
@@ -78,6 +80,7 @@ function Login({ onLogin }: LoginProps) {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                 placeholder="••••••••"
+                disabled={loading}
               />
             </div>
 
@@ -93,10 +96,11 @@ function Login({ onLogin }: LoginProps) {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <LogIn className="w-5 h-5" />
-              Sign In
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
 
             {error && (
@@ -106,22 +110,27 @@ function Login({ onLogin }: LoginProps) {
             )}
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center space-y-2">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/register" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/customer/register" className="text-blue-600 hover:text-blue-700 font-medium">
                 Register here
+              </Link>
+            </p>
+            <p className="text-sm text-gray-600">
+              <Link to="/login" className="text-gray-500 hover:text-gray-700">
+                Admin login →
               </Link>
             </p>
           </div>
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>Secure access for authorized administrators only</p>
+          <p>Secure document management portal</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default CustomerLogin;

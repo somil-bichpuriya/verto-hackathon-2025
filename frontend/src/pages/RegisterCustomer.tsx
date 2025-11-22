@@ -9,6 +9,8 @@ const RegisterCustomer = () => {
     companyName: '',
     email: '',
     address: '',
+    password: '',
+    confirmPassword: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -26,8 +28,23 @@ const RegisterCustomer = () => {
     setLoading(true);
     setError('');
 
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    // Validate password length
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await customerService.register(formData);
+      const { confirmPassword, ...registrationData } = formData;
+      const response = await customerService.register(registrationData);
       if (response.success) {
         // Redirect to confirmation page
         navigate('/register/customer/success', {
@@ -101,6 +118,36 @@ const RegisterCustomer = () => {
               required
               placeholder="Enter your complete company address"
               rows={3}
+              disabled={loading}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password *</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              placeholder="At least 6 characters"
+              minLength={6}
+              disabled={loading}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password *</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              placeholder="Re-enter your password"
+              minLength={6}
               disabled={loading}
             />
           </div>

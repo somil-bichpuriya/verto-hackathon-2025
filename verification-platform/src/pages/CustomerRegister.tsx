@@ -1,61 +1,54 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserPlus, ShieldCheck } from 'lucide-react';
-import { registerUser, getUserByEmail } from '../data/dataService';
+import { UserPlus, ShieldCheck, Building2, Mail, MapPin } from 'lucide-react';
+import { customerService } from '../services/api.service';
 
-function Register() {
-  const navigate = useNavigate();
+function CustomerRegister() {
   const [formData, setFormData] = useState({
-    fullName: '',
+    companyName: '',
     email: '',
-    company: '',
+    address: '',
     password: '',
     confirmPassword: '',
   });
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
-    // Validation
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-    
+
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long');
       return;
     }
-    
-    // Check if email already exists
-    const existingUser = getUserByEmail(formData.email);
-    if (existingUser) {
-      setError('Email already registered. Please login instead.');
-      return;
-    }
-    
+
+    setLoading(true);
+
     try {
-      // Register the user
-      const newUser = registerUser({
-        fullName: formData.fullName,
+      const response = await customerService.register({
+        companyName: formData.companyName,
         email: formData.email,
-        company: formData.company,
+        address: formData.address,
         password: formData.password,
-        role: 'admin'
       });
-      
-      setSuccess(true);
-      
-      // Redirect to login after 2 seconds
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
-      
-    } catch (err) {
-      setError('Registration failed. Please try again.');
+
+      if (response.success) {
+        // Redirect to login page with success message
+        navigate('/customer/login', { state: { message: 'Registration successful! Please log in.' } });
+      } else {
+        setError(response.message || 'Registration failed. Please try again.');
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,30 +62,33 @@ function Register() {
             <ShieldCheck className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">V-Verify</h1>
-          <p className="text-gray-600">Create Admin Account</p>
+          <p className="text-gray-600">Customer Registration</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 animate-slide-in">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Register</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Create your account</h2>
           
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
+              <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
+                <Building2 className="w-4 h-4 inline mr-1" />
+                Company Name
               </label>
               <input
-                id="fullName"
+                id="companyName"
                 type="text"
                 required
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                value={formData.companyName}
+                onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                placeholder="John Doe"
+                placeholder="Your Company Ltd"
+                disabled={loading}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <Mail className="w-4 h-4 inline mr-1" />
                 Email Address
               </label>
               <input
@@ -102,22 +98,25 @@ function Register() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                placeholder="admin@vertofx.com"
+                placeholder="contact@yourcompany.com"
+                disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                Company Name
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+                <MapPin className="w-4 h-4 inline mr-1" />
+                Business Address
               </label>
-              <input
-                id="company"
-                type="text"
+              <textarea
+                id="address"
                 required
-                value={formData.company}
-                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                placeholder="VertoFX Inc."
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none"
+                placeholder="123 Business St, City, Country"
+                rows={3}
+                disabled={loading}
               />
             </div>
 
@@ -133,6 +132,8 @@ function Register() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                 placeholder="••••••••"
+                disabled={loading}
+                minLength={6}
               />
             </div>
 
@@ -148,15 +149,18 @@ function Register() {
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                 placeholder="••••••••"
+                disabled={loading}
+                minLength={6}
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-6"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <UserPlus className="w-5 h-5" />
-              Create Account
+              {loading ? 'Creating account...' : 'Create Account'}
             </button>
 
             {error && (
@@ -164,28 +168,24 @@ function Register() {
                 <p className="text-sm text-red-600 text-center">{error}</p>
               </div>
             )}
-
-            {success && (
-              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-sm text-green-600 text-center">
-                  Registration successful! Redirecting to login...
-                </p>
-              </div>
-            )}
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/customer/login" className="text-blue-600 hover:text-blue-700 font-medium">
                 Sign in here
               </Link>
             </p>
           </div>
+        </div>
+
+        <div className="mt-8 text-center text-sm text-gray-500">
+          <p>By registering, you agree to our Terms of Service and Privacy Policy</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default CustomerRegister;

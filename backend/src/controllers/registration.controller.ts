@@ -9,17 +9,26 @@ export class RegistrationController {
    */
   registerCustomer = asyncHandler(
     async (req: Request, res: Response, _next: NextFunction) => {
-      const { companyName, email, address } = req.body;
+      const { companyName, email, address, password } = req.body;
+
+      // Validate password
+      if (!password || password.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: 'Password must be at least 6 characters long',
+        });
+      }
 
       const customer = await registrationService.registerCustomer({
         companyName,
         email,
         address,
+        password,
       });
 
       res.status(201).json({
         success: true,
-        message: 'Customer registered successfully',
+        message: 'Customer registered successfully. You can now log in with your credentials.',
         data: {
           customer: {
             id: customer._id,
@@ -39,17 +48,26 @@ export class RegistrationController {
    */
   registerPartner = asyncHandler(
     async (req: Request, res: Response, _next: NextFunction) => {
-      const { companyName, email, documentTypesConfig } = req.body;
+      const { companyName, email, documentTypesConfig, password } = req.body;
+
+      // Validate password
+      if (!password || password.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: 'Password must be at least 6 characters long',
+        });
+      }
 
       const { partner, apiKey, apiSecret } = await registrationService.registerPartner({
         companyName,
         email,
         documentTypesConfig: documentTypesConfig || [],
+        password,
       });
 
       res.status(201).json({
         success: true,
-        message: 'Partner registered successfully',
+        message: 'Partner registered successfully. You can now log in with your credentials.',
         data: {
           partner: {
             id: partner._id,

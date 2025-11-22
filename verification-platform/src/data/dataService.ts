@@ -127,6 +127,33 @@ export const authenticateUser = (email: string, password: string): User | null =
   return user || null;
 };
 
+// Authenticate admin using admins array
+export const authenticateAdmin = (username: string, password: string): any | null => {
+  const admin = database.admins.find(a => 
+    a.username?.toLowerCase() === username.toLowerCase() && 
+    a.password === password
+  );
+  return admin || null;
+};
+
+// Authenticate customer using customers array
+export const authenticateCustomer = (email: string, password: string): any | null => {
+  const customer = database.customers.find(c => 
+    c.email.toLowerCase() === email.toLowerCase() && 
+    c.password === password
+  );
+  return customer || null;
+};
+
+// Authenticate partner using partners array
+export const authenticatePartner = (email: string, password: string): any | null => {
+  const partner = database.partners.find(p => 
+    p.email.toLowerCase() === email.toLowerCase() && 
+    p.password === password
+  );
+  return partner || null;
+};
+
 // Initialize localStorage with database users if not already present
 export const initializeUsers = () => {
   if (!localStorage.getItem('users')) {
@@ -153,12 +180,12 @@ export const getClientById = (id: string): Client | undefined => {
 
 // Get all partners
 export const getAllPartners = (): Partner[] => {
-  return database.partners as Partner[];
+  return database.partnerOrganizations as Partner[];
 };
 
 // Get partner by ID
 export const getPartnerById = (id: string): Partner | undefined => {
-  return database.partners.find(partner => partner.id === id) as Partner | undefined;
+  return database.partnerOrganizations.find(partner => partner.id === id) as Partner | undefined;
 };
 
 // Get all documents
@@ -268,9 +295,9 @@ export const searchClients = (searchTerm: string, filterStatus?: string): Client
 
 // Search partners
 export const searchPartners = (searchTerm: string): Partner[] => {
-  if (!searchTerm) return database.partners as Partner[];
+  if (!searchTerm) return database.partnerOrganizations as Partner[];
   
-  return database.partners.filter(partner =>
+  return database.partnerOrganizations.filter(partner =>
     partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     partner.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     partner.country.toLowerCase().includes(searchTerm.toLowerCase())
@@ -282,6 +309,9 @@ export default {
   getUserByEmail,
   registerUser,
   authenticateUser,
+  authenticateAdmin,
+  authenticateCustomer,
+  authenticatePartner,
   initializeUsers,
   initializeDocuments,
   getAllClients,
