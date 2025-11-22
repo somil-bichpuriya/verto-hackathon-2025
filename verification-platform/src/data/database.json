@@ -1,0 +1,661 @@
+{
+  "users": [
+    {
+      "id": "USR-001",
+      "fullName": "Regular User",
+      "email": "user@vertofx.com",
+      "password": "user123",
+      "company": "VertoFX",
+      "role": "user",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "admins": [
+    {
+      "id": "ADM-001",
+      "fullName": "Admin User",
+      "username": "admin",
+      "password": "admin123",
+      "company": "VertoFX",
+      "role": "admin",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUST-001",
+      "fullName": "Customer User",
+      "email": "customer@example.com",
+      "password": "customer123",
+      "companyName": "Example Corp",
+      "address": "123 Business St, City, Country",
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "partners": [
+    {
+      "id": "PART-001",
+      "fullName": "Partner User",
+      "email": "partner@example.com",
+      "password": "partner123",
+      "companyName": "Partner Corp",
+      "apiKey": "verto_abc123def456",
+      "documentTypesConfig": ["Business License", "Tax Registration"],
+      "registeredDate": "2024-01-01"
+    }
+  ],
+  "clients": [
+    {
+      "id": "CLT-001",
+      "name": "Acme Corporation Ltd",
+      "email": "contact@acmecorp.com",
+      "country": "United Kingdom",
+      "status": "approved",
+      "documents": 8,
+      "joinedDate": "2024-01-15",
+      "lastActivity": "2 hours ago",
+      "partnerId": "PTR-001"
+    },
+    {
+      "id": "CLT-002",
+      "name": "TechStart Inc",
+      "email": "info@techstart.com",
+      "country": "United States",
+      "status": "pending",
+      "documents": 5,
+      "joinedDate": "2024-02-20",
+      "lastActivity": "1 day ago",
+      "partnerId": "PTR-002"
+    },
+    {
+      "id": "CLT-003",
+      "name": "Global Traders SA",
+      "email": "admin@globaltraders.es",
+      "country": "Spain",
+      "status": "rejected",
+      "documents": 4,
+      "joinedDate": "2024-01-10",
+      "lastActivity": "3 days ago",
+      "partnerId": "PTR-003"
+    },
+    {
+      "id": "CLT-004",
+      "name": "Eastern Imports Pte Ltd",
+      "email": "support@easternimports.sg",
+      "country": "Singapore",
+      "status": "approved",
+      "documents": 12,
+      "joinedDate": "2023-12-05",
+      "lastActivity": "5 hours ago",
+      "partnerId": "PTR-004"
+    },
+    {
+      "id": "CLT-005",
+      "name": "Nordic Solutions AS",
+      "email": "contact@nordicsolutions.no",
+      "country": "Norway",
+      "status": "pending",
+      "documents": 6,
+      "joinedDate": "2024-03-01",
+      "lastActivity": "12 hours ago",
+      "partnerId": "PTR-001"
+    },
+    {
+      "id": "CLT-006",
+      "name": "Pacific Trade Group",
+      "email": "info@pacifictrade.au",
+      "country": "Australia",
+      "status": "approved",
+      "documents": 9,
+      "joinedDate": "2023-11-20",
+      "lastActivity": "1 hour ago",
+      "partnerId": "PTR-002"
+    },
+    {
+      "id": "CLT-007",
+      "name": "Alpine Industries GmbH",
+      "email": "kontakt@alpine-ind.de",
+      "country": "Germany",
+      "status": "pending",
+      "documents": 7,
+      "joinedDate": "2024-02-14",
+      "lastActivity": "8 hours ago",
+      "partnerId": "PTR-003"
+    },
+    {
+      "id": "CLT-008",
+      "name": "Maple Exports Ltd",
+      "email": "hello@mapleexports.ca",
+      "country": "Canada",
+      "status": "approved",
+      "documents": 10,
+      "joinedDate": "2023-10-30",
+      "lastActivity": "3 hours ago",
+      "partnerId": "PTR-001"
+    },
+    {
+      "id": "CLT-009",
+      "name": "Dragon Enterprises Ltd",
+      "email": "info@dragonent.cn",
+      "country": "China",
+      "status": "pending",
+      "documents": 4,
+      "joinedDate": "2024-03-15",
+      "lastActivity": "6 hours ago",
+      "partnerId": "PTR-004"
+    },
+    {
+      "id": "CLT-010",
+      "name": "Tokyo Trading Co",
+      "email": "contact@tokyotrade.jp",
+      "country": "Japan",
+      "status": "approved",
+      "documents": 15,
+      "joinedDate": "2023-09-10",
+      "lastActivity": "30 minutes ago",
+      "partnerId": "PTR-002"
+    },
+    {
+      "id": "CLT-011",
+      "name": "Rio Import Export SA",
+      "email": "admin@rioimport.br",
+      "country": "Brazil",
+      "status": "rejected",
+      "documents": 3,
+      "joinedDate": "2024-02-28",
+      "lastActivity": "2 days ago",
+      "partnerId": "PTR-003"
+    },
+    {
+      "id": "CLT-012",
+      "name": "Mumbai Logistics Pvt",
+      "email": "support@mumbailog.in",
+      "country": "India",
+      "status": "pending",
+      "documents": 8,
+      "joinedDate": "2024-03-20",
+      "lastActivity": "4 hours ago",
+      "partnerId": "PTR-001"
+    },
+    {
+      "id": "CLT-013",
+      "name": "Dubai Trade Hub LLC",
+      "email": "info@dubaitrade.ae",
+      "country": "UAE",
+      "status": "approved",
+      "documents": 11,
+      "joinedDate": "2023-08-15",
+      "lastActivity": "1 hour ago",
+      "partnerId": "PTR-004"
+    },
+    {
+      "id": "CLT-014",
+      "name": "Cape Merchants Ltd",
+      "email": "contact@capemerchants.za",
+      "country": "South Africa",
+      "status": "rejected",
+      "documents": 5,
+      "joinedDate": "2024-01-25",
+      "lastActivity": "5 days ago",
+      "partnerId": "PTR-002"
+    },
+    {
+      "id": "CLT-015",
+      "name": "Seoul Tech Partners",
+      "email": "hello@seoultech.kr",
+      "country": "South Korea",
+      "status": "pending",
+      "documents": 6,
+      "joinedDate": "2024-03-10",
+      "partnerId": "PTR-003",
+      "lastActivity": "10 hours ago"
+    }
+  ],
+  "partnerOrganizations": [
+    {
+      "id": "PTR-001",
+      "name": "Wise",
+      "email": "partners@wise.com",
+      "country": "United Kingdom",
+      "requestsCount": 45,
+      "status": "active",
+      "joinedDate": "2023-06-15",
+      "lastRequest": "2 hours ago"
+    },
+    {
+      "id": "PTR-002",
+      "name": "PayGlobal Inc",
+      "email": "integration@payglobal.com",
+      "country": "United States",
+      "requestsCount": 32,
+      "status": "active",
+      "joinedDate": "2023-08-20",
+      "lastRequest": "1 day ago"
+    },
+    {
+      "id": "PTR-003",
+      "name": "EuroTransfer SA",
+      "email": "api@eurotransfer.eu",
+      "country": "France",
+      "requestsCount": 28,
+      "status": "active",
+      "joinedDate": "2023-09-10",
+      "lastRequest": "5 hours ago"
+    },
+    {
+      "id": "PTR-004",
+      "name": "Asia Pacific Verify",
+      "email": "contact@apverify.com",
+      "country": "Singapore",
+      "requestsCount": 12,
+      "status": "pending",
+      "joinedDate": "2024-01-05",
+      "lastRequest": "3 days ago"
+    },
+    {
+      "id": "PTR-005",
+      "name": "Nordic Payment Systems",
+      "email": "tech@nordicpay.no",
+      "country": "Norway",
+      "requestsCount": 38,
+      "status": "active",
+      "joinedDate": "2023-07-22",
+      "lastRequest": "12 hours ago"
+    },
+    {
+      "id": "PTR-006",
+      "name": "PayGlobal Inc",
+      "email": "integration@payglobal.com",
+      "country": "United States",
+      "requestsCount": 32,
+      "status": "active",
+      "joinedDate": "2023-08-20",
+      "lastRequest": "1 day ago"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "clientId": "CLT-001",
+      "name": "Business Registration Certificate",
+      "type": "PDF",
+      "uploadDate": "2024-01-15",
+      "size": "2.4 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-01-16",
+      "expiryDate": "2025-01-16",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-002",
+      "clientId": "CLT-001",
+      "name": "Company Articles of Association",
+      "type": "PDF",
+      "uploadDate": "2024-01-15",
+      "size": "1.8 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-003",
+      "clientId": "CLT-001",
+      "name": "Director ID - John Smith",
+      "type": "PDF",
+      "uploadDate": "2024-01-16",
+      "size": "956 KB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-004",
+      "clientId": "CLT-001",
+      "name": "Proof of Address",
+      "type": "PDF",
+      "uploadDate": "2024-01-16",
+      "size": "1.2 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-01-17",
+      "expiryDate": "2025-01-17",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-005",
+      "clientId": "CLT-001",
+      "name": "Bank Statement",
+      "type": "PDF",
+      "uploadDate": "2024-01-17",
+      "size": "3.1 MB",
+      "status": "rejected",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-01-18",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-006",
+      "clientId": "CLT-002",
+      "name": "Business License",
+      "type": "PDF",
+      "uploadDate": "2024-02-20",
+      "size": "2.1 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-007",
+      "clientId": "CLT-002",
+      "name": "Tax Registration",
+      "type": "PDF",
+      "uploadDate": "2024-02-20",
+      "size": "1.5 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-008",
+      "clientId": "CLT-003",
+      "name": "Company Registration",
+      "type": "PDF",
+      "uploadDate": "2024-01-10",
+      "size": "2.8 MB",
+      "status": "rejected",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-01-12",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-009",
+      "clientId": "CLT-009",
+      "name": "Business License",
+      "type": "PDF",
+      "uploadDate": "2024-03-15",
+      "size": "1.9 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-010",
+      "clientId": "CLT-009",
+      "name": "Tax Clearance Certificate",
+      "type": "PDF",
+      "uploadDate": "2024-03-15",
+      "size": "1.2 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-011",
+      "clientId": "CLT-010",
+      "name": "Corporate Registration",
+      "type": "PDF",
+      "uploadDate": "2023-09-10",
+      "size": "3.2 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2023-09-12",
+      "expiryDate": "2024-09-12",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-012",
+      "clientId": "CLT-010",
+      "name": "Director Identification",
+      "type": "PDF",
+      "uploadDate": "2023-09-10",
+      "size": "2.1 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2023-09-12",
+      "expiryDate": "2024-09-12",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-013",
+      "clientId": "CLT-011",
+      "name": "Business Registration",
+      "type": "PDF",
+      "uploadDate": "2024-02-28",
+      "size": "2.5 MB",
+      "status": "rejected",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-03-01",
+      "reviewNotes": "Document quality insufficient for verification",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-014",
+      "clientId": "CLT-011",
+      "name": "Tax Registration",
+      "type": "PDF",
+      "uploadDate": "2024-02-28",
+      "size": "1.8 MB",
+      "status": "rejected",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-03-01",
+      "reviewNotes": "Expired document",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-015",
+      "clientId": "CLT-012",
+      "name": "Company Certificate",
+      "type": "PDF",
+      "uploadDate": "2024-03-20",
+      "size": "2.3 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-016",
+      "clientId": "CLT-012",
+      "name": "Financial Statement",
+      "type": "PDF",
+      "uploadDate": "2024-03-20",
+      "size": "3.5 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-017",
+      "clientId": "CLT-013",
+      "name": "Trade License",
+      "type": "PDF",
+      "uploadDate": "2023-08-15",
+      "size": "2.7 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2023-08-17",
+      "expiryDate": "2024-08-17",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-018",
+      "clientId": "CLT-013",
+      "name": "Bank Reference Letter",
+      "type": "PDF",
+      "uploadDate": "2023-08-15",
+      "size": "1.4 MB",
+      "status": "approved",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2023-08-17",
+      "expiryDate": "2024-08-17",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-019",
+      "clientId": "CLT-014",
+      "name": "Registration Certificate",
+      "type": "PDF",
+      "uploadDate": "2024-01-25",
+      "size": "2.1 MB",
+      "status": "rejected",
+      "reviewedBy": "Admin User",
+      "reviewDate": "2024-01-27",
+      "reviewNotes": "Missing required signatures",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-020",
+      "clientId": "CLT-015",
+      "name": "Business Permit",
+      "type": "PDF",
+      "uploadDate": "2024-03-10",
+      "size": "1.6 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "DOC-021",
+      "clientId": "CLT-015",
+      "name": "Tax ID Certificate",
+      "type": "PDF",
+      "uploadDate": "2024-03-10",
+      "size": "1.1 MB",
+      "status": "pending",
+      "previewUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "clientId": "CLT-001",
+      "client": "Acme Corp Ltd",
+      "action": "Documents approved",
+      "time": "5 minutes ago",
+      "status": "approved",
+      "country": "United Kingdom"
+    },
+    {
+      "id": 2,
+      "clientId": "CLT-002",
+      "client": "TechStart Inc",
+      "action": "Verification pending",
+      "time": "12 minutes ago",
+      "status": "pending",
+      "country": "United States"
+    },
+    {
+      "id": 3,
+      "clientId": "CLT-003",
+      "client": "Global Traders SA",
+      "action": "Documents rejected",
+      "time": "1 hour ago",
+      "status": "rejected",
+      "country": "Spain"
+    },
+    {
+      "id": 4,
+      "clientId": "CLT-004",
+      "client": "Eastern Imports",
+      "action": "Documents approved",
+      "time": "2 hours ago",
+      "status": "approved",
+      "country": "Singapore"
+    },
+    {
+      "id": 5,
+      "clientId": "CLT-005",
+      "client": "Nordic Solutions",
+      "action": "New submission",
+      "time": "3 hours ago",
+      "status": "pending",
+      "country": "Norway"
+    },
+    {
+      "id": 6,
+      "clientId": "CLT-010",
+      "client": "Tokyo Trading Co",
+      "action": "Documents approved",
+      "time": "30 minutes ago",
+      "status": "approved",
+      "country": "Japan"
+    },
+    {
+      "id": 7,
+      "clientId": "CLT-011",
+      "client": "Rio Import Export",
+      "action": "Documents rejected",
+      "time": "2 days ago",
+      "status": "rejected",
+      "country": "Brazil"
+    },
+    {
+      "id": 8,
+      "clientId": "CLT-012",
+      "client": "Mumbai Logistics",
+      "action": "Verification pending",
+      "time": "4 hours ago",
+      "status": "pending",
+      "country": "India"
+    },
+    {
+      "id": 9,
+      "clientId": "CLT-013",
+      "client": "Dubai Trade Hub",
+      "action": "Documents approved",
+      "time": "1 hour ago",
+      "status": "approved",
+      "country": "UAE"
+    },
+    {
+      "id": 10,
+      "clientId": "CLT-014",
+      "client": "Cape Merchants",
+      "action": "Documents rejected",
+      "time": "5 days ago",
+      "status": "rejected",
+      "country": "South Africa"
+    }
+  ],
+  "stats": {
+    "totalClients": 2854,
+    "pendingReviews": 163,
+    "approved": 2464,
+    "activePartners": 42,
+    "rejected": 235
+  },
+  "verificationTrend": [
+    {
+      "month": "Jan",
+      "verifications": 240
+    },
+    {
+      "month": "Feb",
+      "verifications": 320
+    },
+    {
+      "month": "Mar",
+      "verifications": 280
+    },
+    {
+      "month": "Apr",
+      "verifications": 390
+    },
+    {
+      "month": "May",
+      "verifications": 420
+    },
+    {
+      "month": "Jun",
+      "verifications": 510
+    }
+  ],
+  "documentStatus": [
+    {
+      "name": "Approved",
+      "value": 2464,
+      "color": "#10b981"
+    },
+    {
+      "name": "Pending",
+      "value": 163,
+      "color": "#f59e0b"
+    },
+    {
+      "name": "Rejected",
+      "value": 235,
+      "color": "#ef4444"
+    }
+  ]
+}
